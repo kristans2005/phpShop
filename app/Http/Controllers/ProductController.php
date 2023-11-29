@@ -37,11 +37,30 @@ class ProductController extends Controller
         $image->move(public_path('images'), $fileName);
 
         // storing filename to the database
-        $product->imageURL = '/images/' . $fileName;
+        $product->imageURl = '/images/' . $fileName;
 
         $product->save();
         
         return redirect("/products");
 
     }
+
+    public function show(Request $request, $id){
+        $product = Product::find($id);
+        // dd($id->name);
+        if ($product){
+            return view("products.show", ["product" => $product ]);    
+        }
+        return redirect("/products");
+    }
+
+    public function edit($id) {
+        $product = Product::find($id);
+        // dd($product);
+        if ($product){
+            return view("products.edit", ["product" => $product ]);    
+        }
+        return redirect("/products");
+    }
+
 }
