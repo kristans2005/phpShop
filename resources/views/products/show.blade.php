@@ -10,9 +10,15 @@
   <h1>Products</h1>
   <main>
       <h2>{{$product->name}}</h2>
-      <img src={{$product->imageURL}} alt="{{$product->name}}" width="200px"/>
+      <img src="{{$product->imageURl}}" alt="{{$product->name}}" width="200px"/>
       <p>{{$product->description}}</p>
       <p>{{$product->price}} EUR</p>
+
+      <form method="POST" action="/products/{{$product->id}}">
+        @csrf
+        @method("DELETE")
+        <button>Delete</button>
+      </form>
   </main>
 </body>
 </html>
